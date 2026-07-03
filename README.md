@@ -143,7 +143,7 @@ Key learning:
 * MOSFET switching logic
 * pull-down gate stability
 
-Status: Pending
+Status: Complete
 
 ⸻
 
@@ -164,7 +164,7 @@ Key learning:
 * switching under load
 * system-level validation
 
-Status: Pending
+Status: Complete
 
 ⸻
 
@@ -218,8 +218,8 @@ Current Status
 
 * Stage 1: Complete
 * Stage 2: Complete
-* Stage 3: In Progress
-* Stage 4: Pending
+* Stage 3: Complete
+* Stage 4: Complete
 * Stage 5: Pending
 
 ⸻
