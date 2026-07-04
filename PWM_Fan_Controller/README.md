@@ -185,7 +185,7 @@ Key learning:
 * duty cycle visualization
 * software-to-signal correlation
 
-Status: Pending
+Status: Complete
 
 ⸻
 
@@ -220,8 +220,20 @@ Current Status
 * Stage 2: Complete
 * Stage 3: Complete
 * Stage 4: Complete
-* Stage 5: Pending
+* Stage 5: Complete
 
+⸻
+
+## Engineering Notes
+
+This project taught me much more than just PWM motor control.
+
+- A circuit can appear functional while still having wiring issues, poor design decisions, or hidden electrical problems. This project taught me to think beyond “it works.”
+- As a visual learner, I initially focused too much on physical wire placement.
+- Realizing components do not need direct visible lines to be connected and shared nets define electrical connectivity improved my KiCAD understanding and breadboard debugging.
+- As wiring became more complex, I started understanding signal flow much better, which made debugging more logical and systematic.
+- Seeing LOW, MEDIUM, and HIGH duty cycles side-by-side made PWM intuitive
+- I finally understood that PWM is rapid ON/OFF switching, fixed frequencey and changing duty cycles.
 ⸻
 
 ## Long-Term Objective
