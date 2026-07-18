@@ -1,0 +1,213 @@
+````markdown
+# Rotary Encoder Speed Controller
+
+Embedded systems project implementing interrupt-driven rotary encoder input for real-time PWM motor speed control using Arduino, MOSFET switching, and quadrature decoding.
+
+This project documents the complete development flow from interrupt-based firmware architecture and encoder decoding to hardware integration and logic analyzer verification.
+
+⸻
+
+## Project Goals
+
+Build a motor controller capable of adjusting speed using a rotary encoder while preserving the selected speed setting and allowing the motor to be enabled or disabled independently.
+
+Target behavior:
+
+* Rotate clockwise → Increase speed
+* Rotate counter-clockwise → Decrease speed
+* Push encoder button → Toggle motor ON/OFF
+* Preserve selected speed while motor is OFF
+
+The project emphasizes firmware architecture, event-driven programming, and hardware validation.
+
+
+⸻
+
+## Core Concepts
+
+This project focuses on:
+
+* interrupt-driven programming
+* rotary encoder decoding
+* quadrature state transitions
+* detent accumulation
+* debounce logic
+* PWM motor control
+* event-driven firmware
+* modular software architecture
+* signal verification
+
+⸻
+
+## Hardware Components
+
+Controller
+
+* Arduino Uno
+
+Input
+
+* EC11 Rotary Encoder with Pushbutton
+
+Output
+
+* TT DC Motor
+
+Switching
+
+* IRLZ44N Logic-Level MOSFET
+
+Protection
+
+* 1N4007 Flyback Diode
+
+Supporting Components
+
+* 220Ω Gate Resistor
+* Jumper Wires
+* Breadboard
+
+⸻
+
+## Firmware Development
+
+⸻
+
+### v1 — Initial Interrupt-Based Encoder
+
+Implemented
+
+* Dual ISR implementation
+* Raw encoder interrupt testing
+* Serial diagnostics
+
+Observed
+
+* Encoder functional
+* Inconsistent counting during rapid rotation
+
+Status: Complete
+
+⸻
+
+### v2 — Quadrature State Decoder
+
+Implemented
+
+* Replaced dual ISR logic with transition-table decoder
+* Rejected invalid quadrature state transitions
+* Improved encoder count and direction reliability
+
+Key Learning
+
+* Gray code state transitions
+* Transition lookup tables
+* Reliable direction detection
+
+Status: Complete
+
+⸻
+
+### v3 — Detent-Based Motor Control
+
+Implemented
+
+* Accumulated four quadrature transitions into one encoder detent
+* Added discrete PWM speed-level lookup table
+* Preserved selected speed while motor output is disabled
+* Implemented non-blocking button debounce
+* Refactored firmware into modular processing functions
+
+Key Learning
+
+* Event-driven firmware design
+* State separation
+* Modular embedded architecture
+* Interrupt-safe data sharing
+
+Status: Complete
+
+⸻
+
+## Verification
+
+Completed
+
+* Verified quadrature encoder waveforms using a logic analyzer.
+* Confirmed one encoder detent corresponds to four valid quadrature transitions.
+* Verified PWM duty cycle changes across all speed levels.
+* Validated motor enable/disable behavior while preserving the selected speed level.
+
+⸻
+
+## Firmware Highlights
+
+Key firmware concepts used:
+
+* hardware interrupts
+* transition lookup table
+* detent accumulator
+* volatile shared variables
+* atomic variable access
+* modular firmware design
+* non-blocking debounce
+* PWM lookup table
+
+Example PWM mapping:
+
+```cpp
+constexpr uint8_t pwmLevels[] = {
+    0, 16, 32, 48, 64, 80, 96, 112,
+    128, 144, 160, 176, 192, 208,
+    224, 240, 255
+};
+```
+
+⸻
+
+## Tools
+
+* Arduino IDE
+* KiCad
+* Logic Analyzer
+* Git
+* GitHub
+
+⸻
+
+## Current Status
+
+* Stage 1: Complete
+* Stage 2: Complete
+* Stage 3: Complete
+* Stage 4: Complete
+* Stage 5: Complete
+
+⸻
+
+## Engineering Notes
+
+This project shifted my focus from simply writing Arduino code to designing embedded software.
+
+- Interrupts allowed the microcontroller to react immediately to encoder movement instead of continuously polling for changes.
+- Separating interrupt-owned variables from application logic made the firmware easier to reason about and debug.
+- Breaking the program into dedicated processing functions made the code significantly cleaner than placing everything inside `loop()`.
+- I learned that rotary encoders produce four electrical transitions for every physical detent and that software must account for this to achieve stable counting.
+- Using a lookup table for PWM levels produced predictable, symmetric speed control while keeping the implementation simple.
+- Capturing both encoder signals and PWM output with a logic analyzer reinforced the importance of verifying software with real electrical measurements instead of assuming the code was correct.
+
+⸻
+
+## Long-Term Objective
+
+This project serves as a foundational embedded systems exercise for learning:
+
+* interrupt-driven firmware
+* event-driven software architecture
+* real-time input processing
+* modular embedded programming
+* embedded debugging methodology
+* hardware signal verification
+
+It also serves as a stepping stone toward more advanced embedded systems development involving timers, communication peripherals, RTOS concepts, and eventually ESP32-based systems.
+````
